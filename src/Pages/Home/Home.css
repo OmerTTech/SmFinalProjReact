@@ -1,0 +1,20 @@
+.homepage .img {
+    background: url(../../Assets/worker-BG-img.jpeg) center no-repeat;
+    background-size: cover;
+    height: 150vh;
+    filter: brightness(0.4);
+    clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 90%);
+}
+.homepage .elements {
+    justify-content: center;
+    height: 100vh;
+    position: absolute;
+    top: 75px;
+}
+.homepage .elements > *{
+    position: relative;
+    top: 75px;
+}
+.homepage .elements p {
+    font-size: 1.15rem;
+}

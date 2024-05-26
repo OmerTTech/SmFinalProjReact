@@ -2,7 +2,11 @@ import React from 'react'
 
 const UserCard = () => {
   return (
-    <div>UserCard</div>
+    <div className='d-flex flex-column'>
+      <p></p>
+      <p></p>
+      <img src={} alt="" />
+    </div>
   )
 }
 

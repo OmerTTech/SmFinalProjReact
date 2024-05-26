@@ -1,13 +1,14 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import Logo from "../../Assets/Logo.png"
 
 const Header = () => {
   return (
     <header>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
+        <div className="container">
           <Link className="navbar-brand" to="/">
-            <img src="https://i.ibb.co/pyQpkGD/Logo.png" alt="Logo" width="60" height="30" className="d-inline-block align-text-top" />
+            <img src={Logo} alt="Logo" width="60" height="30" className="d-inline-block align-text-top" />
             <em className="ms-2">Project</em>
           </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">

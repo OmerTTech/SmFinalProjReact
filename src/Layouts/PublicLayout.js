@@ -2,12 +2,11 @@ import React from 'react';
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
 
-const PublicLayout = (props) => {
-    console.log(props);
+const PublicLayout = ({ children }) => {
     return (
         <div>
             <Header />
-            <main>{props.children}</main>
+            <main>{children}</main>
             <Footer />
         </div>
     );

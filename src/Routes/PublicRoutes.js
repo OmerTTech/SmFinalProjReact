@@ -11,11 +11,11 @@ const PublicRoutes = () => {
     return (
         <PublicLayout>
             <Routes>
-                <Route path='/' to={<Home />} />
-                <Route path='/users' to={<Users />} />
-                <Route path='/favorites' to={<Favorites />} />
-                <Route path='/register' to={<Register />} />
-                <Route path='/login' to={<Login />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/users' element={<Users />} />
+                <Route path='/favorites' element={<Favorites />} />
+                <Route path='/register' element={<Register />} />
+                <Route path='/login' element={<Login />} />
             </Routes>
         </PublicLayout>
     )

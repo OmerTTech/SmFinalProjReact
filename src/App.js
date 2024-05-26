@@ -5,12 +5,12 @@ import PublicRoutes from './Routes/PublicRoutes';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap';
 
+
 function App() {
   const isLogged = false
   return (
     <BrowserRouter>
-    
-      {isLogged ? <AdminRoutes/> : <PublicRoutes/>}
+      {isLogged ? <AdminRoutes /> : <PublicRoutes />}
     </BrowserRouter>
   );
 }
