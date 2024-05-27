@@ -1,36 +1,39 @@
 import React, { useContext, useEffect } from "react";
 import UserCard from "../../Components/UserCard/UserCard";
 import { UserContext } from "../../Services/userContext";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Users = () => {
-  const { users, fetchUsers, loadMoreUsers, nextUsers, nextUsersList } =
-    useContext(UserContext);
+  const { users, fetchUsers, loadMoreUsers, userPage, datas, loading } = useContext(UserContext);
 
   useEffect(() => {
-    fetchUsers();
-    console.log(users);
+    fetchUsers(1);
   }, []);
 
+
+
   return (
-    <div className="container ">
+    <div className="container">
       <div className="row mx-5 p-5 pt-4 g-5">
-        {users ? (
+        {users.length > 0 ? (
           <>
             {users.map((item) => (
               <UserCard key={item.id} user={item} />
             ))}
-            {
-              nextUsers.length > 0 && <button
-              onClick={loadMoreUsers}
-              className="btn btn-success w-25 mx-auto"
-            >
-              Load More..
-            </button>
-            }
+            {datas && userPage < datas.total_pages && (
+              <button
+                onClick={loadMoreUsers}
+                className="btn btn-success w-25 mx-auto"
+              >
+                Load More..
+              </button>
+            )}
           </>
         ) : (
+          
           <div className="alert alert-danger" role="alert">
-            Not Users Found!
+            <ClipLoader color="#36d7b7" />
+            Users Not Found..
           </div>
         )}
       </div>
