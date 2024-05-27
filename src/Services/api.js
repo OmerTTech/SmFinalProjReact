@@ -4,9 +4,6 @@ const API_URL = 'https://reqres.in/';
 
 export const api = axios.create({
   baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
 });
 
 export const getUsers = (page) => api.get(`/api/users?page=${page}`);

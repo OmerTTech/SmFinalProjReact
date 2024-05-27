@@ -4,7 +4,7 @@ import Logo from "../../Assets/Logo.png"
 
 const Header = () => {
   return (
-    <header>
+    <header className="position-sticky" style={{top: "0"}}>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container">
           <Link className="navbar-brand" to="/">
