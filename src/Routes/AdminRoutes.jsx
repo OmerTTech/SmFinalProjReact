@@ -9,7 +9,7 @@ const AdminRoutes = () => {
     <AdminLayout>
       <Routes>
         {/* Homepage 2-path for sidebar navlink */}
-        <Route path="/admin/" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/admin/homepage" element={<HomePage />} />
         {/* Homepage 2-path for sidebar navlink */}
 

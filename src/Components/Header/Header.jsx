@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../Assets/Logo.png";
-import { MdFavoriteBorder } from "react-icons/md";
 import { GrFavorite } from "react-icons/gr";
 
 const Header = () => {
@@ -45,14 +44,16 @@ const Header = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/favorites">
                   <div className=" d-flex align-items-center justify-content-center pt-2 pb-1">
-                    <GrFavorite className="position-relative" style={{bottom: "2.5px"}}/>
+                    <GrFavorite
+                      className="position-relative"
+                      style={{ bottom: "2.5px" }}
+                    />
                   </div>
                 </NavLink>
               </li>
-              <li className="nav-item dropdown-center dropdown">
+              <li className="nav-item dropdown">
                 <span
                   className="nav-link dropdown-toggle"
-                  to="#"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -60,8 +61,8 @@ const Header = () => {
                   Username
                 </span>
                 <ul
-                  className="dropdown-menu position-absolute"
-                  style={{ left: "-75%", top: "50px" }}
+                  className="dropdown-menu"
+                  
                 >
                   <li>
                     <Link className="dropdown-item" to="#">

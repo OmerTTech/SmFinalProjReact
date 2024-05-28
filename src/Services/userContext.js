@@ -10,6 +10,9 @@ export const UserProvider = ({ children }) => {
   const [datas, setDatas] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
   const [loading, setLoading] = useState(true); 
+  
+  const [isLogged, setIsLogged] = useState([]);
+  useEffect(()=>{setIsLogged(true)},[])
 
   const fetchUsers = async (page = 1) => {
     try {
@@ -68,7 +71,7 @@ export const UserProvider = ({ children }) => {
   
 
   return (
-    <UserContext.Provider value={{ users, datas, allUsers, getDatas, setUsers, nextUsers, setNextUsers, fetchUsers, loadMoreUsers, getAllUsers, userPage, loading }}>
+    <UserContext.Provider value={{ users, datas, allUsers, getDatas, setUsers, nextUsers, setNextUsers, fetchUsers, loadMoreUsers, getAllUsers, userPage, loading , isLogged, setIsLogged }}>
       {children}
     </UserContext.Provider>
   );

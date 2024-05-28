@@ -14,7 +14,8 @@ const Users = () => {
 
   return (
     <div className="container">
-      <div className="row mx-5 p-5 pt-4 g-5">
+
+      <div className="row mx-5 p- pt-4 g-5">
         {users.length > 0 ? (
           <>
             {users.map((item) => (

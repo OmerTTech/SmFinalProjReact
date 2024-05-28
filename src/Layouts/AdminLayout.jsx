@@ -1,5 +1,5 @@
 import React from "react";
-import Sidebar from "../admin/Sidebar/sidebar";
+import Sidebar from "../admin/Sidebar/Sidebar";
 const AdminLayout = (props) => {
   return (
     <div className="row d-flex mx-0">

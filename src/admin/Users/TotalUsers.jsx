@@ -13,7 +13,7 @@ const TotalUsers = () => {
   }, []);
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-4 mb-5">
       <h1>Total Users({datas ? datas.total : <ClipLoader color="#00ff00"/>})</h1>
       <table className="table table-striped table-hover mt-5 mx-auto w-75">
         <thead>
