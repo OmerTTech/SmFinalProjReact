@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../Assets/Logo.png";
 import { GrFavorite } from "react-icons/gr";
+import { UserContext } from "../../Services/userContext";
 
 const Header = () => {
+  const { setIsLogged } = useContext(UserContext);
   return (
     <header className="position-sticky" style={{ top: "0", zIndex: "100" }}>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -65,7 +67,7 @@ const Header = () => {
                   
                 >
                   <li>
-                    <Link className="dropdown-item" to="#">
+                    <Link onClick={()=>setIsLogged(true)} className="dropdown-item" to="#">
                       Admin Panel
                     </Link>
                   </li>

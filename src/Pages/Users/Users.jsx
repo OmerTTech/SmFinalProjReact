@@ -10,8 +10,6 @@ const Users = () => {
     fetchUsers(1);
   }, []);
 
-
-
   return (
     <div className="container">
 
