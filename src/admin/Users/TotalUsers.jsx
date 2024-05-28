@@ -1,18 +1,20 @@
 import React, { useContext, useEffect } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 import "./TotalUsers.css"
 import { UserContext } from "../../Services/userContext.js";
 
 const TotalUsers = () => {
-  const { allUsers, getAllUsers } = useContext(UserContext);
+  const { datas, getDatas, allUsers, getAllUsers } = useContext(UserContext);
 
   useEffect(() => {
     getAllUsers();
+    getDatas()
     console.log(allUsers);
   }, []);
 
   return (
     <div className="container mt-5">
-      <h1>Total Users</h1>
+      <h1>Total Users({datas ? datas.total : <ClipLoader color="#00ff00"/>})</h1>
       <table className="table table-striped table-hover mt-5 mx-auto w-75">
         <thead>
           <tr>
@@ -36,7 +38,7 @@ const TotalUsers = () => {
                   <img src={user.avatar} alt={user.first_name} />
                 </td>
                 <td>
-                  <button className="btn btn-success">Update</button>
+                  <button className="btn btn-success me-1">Update</button>
                   <button className="btn btn-danger">Delete</button>
                 </td>
               </tr>

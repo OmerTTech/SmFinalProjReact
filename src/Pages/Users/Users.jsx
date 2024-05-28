@@ -4,7 +4,7 @@ import { UserContext } from "../../Services/userContext";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const Users = () => {
-  const { users, fetchUsers, loadMoreUsers, userPage, datas, loading } = useContext(UserContext);
+  const { users, fetchUsers, loadMoreUsers, userPage, datas } = useContext(UserContext);
 
   useEffect(() => {
     fetchUsers(1);

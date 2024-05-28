@@ -8,8 +8,12 @@ const AdminRoutes = () => {
   return (
     <AdminLayout>
       <Routes>
-        <Route path="/admin/users" element={<Users />} />
+        {/* Homepage 2-path for sidebar navlink */}
         <Route path="/admin/" element={<HomePage />} />
+        <Route path="/admin/homepage" element={<HomePage />} />
+        {/* Homepage 2-path for sidebar navlink */}
+
+        <Route path="/admin/users" element={<Users />} />
       </Routes>
     </AdminLayout>
   );

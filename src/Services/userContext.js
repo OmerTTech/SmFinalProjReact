@@ -65,6 +65,7 @@ export const UserProvider = ({ children }) => {
     };
     loadData();
   }, []);
+  
 
   return (
     <UserContext.Provider value={{ users, datas, allUsers, getDatas, setUsers, nextUsers, setNextUsers, fetchUsers, loadMoreUsers, getAllUsers, userPage, loading }}>

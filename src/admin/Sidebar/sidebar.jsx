@@ -1,29 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import "./sidebar.css";
 const sidebar = () => {
   return (
-    <div className="col-3">
-      <div
-        className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
-        style={{ width: "100%", height: "100vh" }}
-      >
+    <div className="col-3 p-0">
+      <div className="sidebar d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
         <Link
-          to="/"
+          to="/admin"
           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         >
           <span className="fs-4">Sidebar</span>
         </Link>
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item">
-            <Link to="/admin/" className="nav-link active" aria-current="page">
+          <li>
+            <NavLink to="/admin/homepage" className="myNav-link" aria-current="page">
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/admin/users" className="nav-link text-white">
+            <NavLink to="/admin/users" className="myNav-link">
               Users
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>
