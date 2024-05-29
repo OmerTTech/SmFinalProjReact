@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { allData, getUsers } from "./api";
+import toast from 'react-hot-toast';
 
 export const UserContext = createContext();
 
@@ -10,10 +11,12 @@ export const UserProvider = ({ children }) => {
   const [datas, setDatas] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
   const [sortFilter, setSortFilter] = useState("");
+  const [favCount, setFavCount] = useState()
   const [loading, setLoading] = useState(true); 
   
+  
   const [isLogged, setIsLogged] = useState([]);
-  useEffect(()=>{setIsLogged(true)},[])
+  useEffect(()=>{setIsLogged(false)},[])
 
   const fetchUsers = async (page = 1) => {
     try {
@@ -83,10 +86,24 @@ export const UserProvider = ({ children }) => {
     };
     loadData();
   }, []);
+
+  const favHandler = (user) => {
+    const myFavs = JSON.parse(localStorage.getItem("favorites")) || []
+    const isAlreadyFavorited = myFavs.filter(fav => fav.id === user.id).length > 0
+    if (!isAlreadyFavorited) {
+      const updatedFavs = [...myFavs, user];
+      toast.success('Successfully added Favorites!')
+      localStorage.setItem("favorites", JSON.stringify(updatedFavs))
+      setFavCount(updatedFavs.length)
+    }
+    else(
+      toast.error('You have already added your favorites')
+    )
+  }
   
 
   return (
-    <UserContext.Provider value={{ users, setUsers, datas, allUsers, getDatas, setUsers, nextUsers, setNextUsers, fetchUsers, loadMoreUsers, getAllUsers, userPage, sortFilter, setSortFilter, loading ,  isLogged, setIsLogged, sortUsers }}>
+    <UserContext.Provider value={{ users, setUsers, datas, allUsers, getDatas, setUsers, nextUsers, setNextUsers, fetchUsers, loadMoreUsers, getAllUsers, userPage, sortFilter, setSortFilter, loading ,  isLogged, setIsLogged, sortUsers, favHandler, favCount, setFavCount }}>
       {children}
     </UserContext.Provider>
   );
