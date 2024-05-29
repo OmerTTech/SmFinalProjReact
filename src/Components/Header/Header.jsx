@@ -64,7 +64,6 @@ const Header = () => {
                 </span>
                 <ul
                   className="dropdown-menu"
-                  
                 >
                   <li>
                     <Link onClick={()=>setIsLogged(true)} className="dropdown-item" to="#">

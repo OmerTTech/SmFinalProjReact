@@ -9,6 +9,7 @@ export const UserProvider = ({ children }) => {
   const [userPage, setUserPage] = useState(1);
   const [datas, setDatas] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
+  const [sortFilter, setSortFilter] = useState("");
   const [loading, setLoading] = useState(true); 
   
   const [isLogged, setIsLogged] = useState([]);
@@ -34,6 +35,7 @@ export const UserProvider = ({ children }) => {
       users = [...users, ...pageUsers];
     }
     setAllUsers(users);
+    setUsers(users)
   };
 
   const getDatas = async () => {
@@ -51,12 +53,25 @@ export const UserProvider = ({ children }) => {
       setUserPage(nextPage);
       try {
         const response = await getUsers(nextPage);
-        setNextUsers([...nextUsers, ...response.data.data]);
-        setUsers([...users, ...response.data.data]);
+        const newUsers = response.data.data;
+        const sortedUsers = sortUsers([...users, ...newUsers], sortFilter);
+        setNextUsers([...nextUsers, ...newUsers]);
+        setUsers(sortedUsers);
       } catch (error) {
         console.error("Error loading more users:", error);
       }
     }
+  };
+
+  const sortUsers = (users, order) => {
+    return users.sort((a, b) => {
+      if (order === "A-Z") {
+        return a.first_name > b.first_name ? 1 : -1;
+      } else if (order === "Z-A") {
+        return a.first_name < b.first_name ? 1 : -1;
+      }
+      return 0;
+    });
   };
 
   useEffect(() => {
@@ -71,7 +86,7 @@ export const UserProvider = ({ children }) => {
   
 
   return (
-    <UserContext.Provider value={{ users, datas, allUsers, getDatas, setUsers, nextUsers, setNextUsers, fetchUsers, loadMoreUsers, getAllUsers, userPage, loading , isLogged, setIsLogged }}>
+    <UserContext.Provider value={{ users, setUsers, datas, allUsers, getDatas, setUsers, nextUsers, setNextUsers, fetchUsers, loadMoreUsers, getAllUsers, userPage, sortFilter, setSortFilter, loading ,  isLogged, setIsLogged, sortUsers }}>
       {children}
     </UserContext.Provider>
   );
