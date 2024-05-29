@@ -1,0 +1,50 @@
+.usercard img {
+    height: 75%;
+}
+.usercard button {
+    background-color: #fff;
+    border: 1px solid #0077b5;
+    padding: 5px;
+    position: relative;
+    width: 8.5em;
+    padding: 1em;
+    transition: 0.5s;
+    font-size: 17px;
+    border-radius: 0.4em;
+  }
+  
+  .usercard button p {
+    position: absolute;
+    top: 0.2em;
+    left: 1.2em;
+    margin: 0;
+    padding: 0;
+    transition: .5s;
+    color: #0077b5;
+  }
+  
+  .usercard button span {
+    position: absolute;
+    top: 0.1em;
+    right: 0.5em;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    transition: 0.5s;
+    height: 1em;
+    fill: #fff
+  }
+  
+  .usercard button:hover p {
+    left: 0.6em;
+    color: #fff
+  }
+  
+  .usercard button:hover span {
+    opacity: 1;
+  }
+  
+  .usercard button:hover {
+    background-color: #0077b5;
+  }
+  
