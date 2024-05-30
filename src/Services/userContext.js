@@ -16,7 +16,7 @@ export const UserProvider = ({ children }) => {
   
   
   const [isLogged, setIsLogged] = useState([]);
-  useEffect(()=>{setIsLogged(false)},[])
+  useEffect(()=>{setIsLogged(true)},[])
 
   const fetchUsers = async (page = 1) => {
     try {
