@@ -5,14 +5,13 @@ import Logo from "../../Assets/Logo.png";
 import { GrFavorite } from "react-icons/gr";
 import { UserContext } from "../../Services/userContext";
 
-
 const Header = () => {
   const { setIsLogged, favCount, setFavCount } = useContext(UserContext);
 
-  useEffect(()=>{
-    const myFavs = JSON.parse(localStorage.getItem("favorites")) || []
-    setFavCount(myFavs.length)
-  },[])
+  useEffect(() => {
+    const myFavs = JSON.parse(localStorage.getItem("favorites")) || [];
+    setFavCount(myFavs.length);
+  }, []);
   return (
     <header className="position-sticky" style={{ top: "0", zIndex: "100" }}>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -52,16 +51,19 @@ const Header = () => {
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/favorites">
-                  <div
-                    className="d-flex align-items-center justify-content-center pt-2 pb-1"
-                    
-                  >
-                    <GrFavorite className="position-relative" style={{ bottom: "2.5px" }}/>
+                  <div className="d-flex align-items-center justify-content-center pt-2 pb-1">
+                    <GrFavorite
+                      className="position-relative"
+                      style={{ bottom: "2.5px" }}
+                    />
                   </div>
                 </NavLink>
               </li>
-              <span className="favorites-counter position-relative">{favCount}</span>
-
+              <NavLink className="text-decoration-none text-secondary" to="/favorites">
+                <span className="favorites-counter position-relative">
+                  {favCount}
+                </span>
+              </NavLink>
               <li className="nav-item dropdown">
                 <span
                   className="nav-link dropdown-toggle"
