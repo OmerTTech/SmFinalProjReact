@@ -59,7 +59,7 @@ const Header = () => {
                   </div>
                 </NavLink>
               </li>
-              <NavLink className="nav-link" to="/favorites">
+              <NavLink className="text-decoration-none text-secondary" to="/favorites">
                 <span className="favorites-counter position-relative">
                   {favCount}
                 </span>
