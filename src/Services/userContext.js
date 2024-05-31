@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from "react";
 import { allData, getUsers } from "./api";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 export const UserContext = createContext();
 
@@ -11,18 +11,31 @@ export const UserProvider = ({ children }) => {
   const [datas, setDatas] = useState(null);
   const [allUsers, setAllUsers] = useState([]);
   const [sortFilter, setSortFilter] = useState("");
-  const [favCount, setFavCount] = useState()
-  const [loading, setLoading] = useState(true); 
-  
-  
+  const [favCount, setFavCount] = useState();
+  const [favUsers, setFavUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const [isLogged, setIsLogged] = useState([]);
-  useEffect(()=>{setIsLogged(true)},[])
+  useEffect(() => {
+    setIsLogged(false);
+  }, []);
 
   const fetchUsers = async (page = 1) => {
     try {
       const response = await getUsers(page);
       setUsers(response.data.data);
-      return response.data.data; 
+      return response.data.data;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getFavoriteUsers = async () => {
+    try {
+      const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      setFavUsers(favorites);
+      return favorites;
     } catch (error) {
       console.error("Error fetching users:", error);
     } finally {
@@ -32,13 +45,13 @@ export const UserProvider = ({ children }) => {
 
   const getAllUsers = async () => {
     let users = [];
-    const totalPages = 3; 
+    const totalPages = 3;
     for (let i = 1; i <= totalPages; i++) {
       const pageUsers = await fetchUsers(i);
       users = [...users, ...pageUsers];
     }
     setAllUsers(users);
-    setUsers(users)
+    setUsers(users);
   };
 
   const getDatas = async () => {
@@ -88,22 +101,46 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const favHandler = (user) => {
-    const myFavs = JSON.parse(localStorage.getItem("favorites")) || []
-    const isAlreadyFavorited = myFavs.filter(fav => fav.id === user.id).length > 0
+    const myFavs = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isAlreadyFavorited =
+      myFavs.filter((fav) => fav.id === user.id).length > 0;
     if (!isAlreadyFavorited) {
       const updatedFavs = [...myFavs, user];
-      toast.success('Successfully added Favorites!')
-      localStorage.setItem("favorites", JSON.stringify(updatedFavs))
-      setFavCount(updatedFavs.length)
-    }
-    else(
-      toast.error('You have already added your favorites')
-    )
-  }
-  
+      toast.success("Successfully added Favorites!");
+      localStorage.setItem("favorites", JSON.stringify(updatedFavs));
+      setFavCount(updatedFavs.length);
+    } else toast.error("You have already added your favorites");
+  };
 
   return (
-    <UserContext.Provider value={{ users, setUsers, datas, allUsers, getDatas, setUsers, nextUsers, setNextUsers, fetchUsers, loadMoreUsers, getAllUsers, userPage, sortFilter, setSortFilter, loading ,  isLogged, setIsLogged, sortUsers, favHandler, favCount, setFavCount }}>
+    <UserContext.Provider
+      value={{
+        users,
+        setUsers,
+        datas,
+        allUsers,
+        getDatas,
+        setUsers,
+        nextUsers,
+        setNextUsers,
+        fetchUsers,
+        loadMoreUsers,
+        getAllUsers,
+        userPage,
+        sortFilter,
+        setSortFilter,
+        loading,
+        isLogged,
+        setIsLogged,
+        sortUsers,
+        favHandler,
+        favCount,
+        setFavCount,
+        favUsers,
+        setFavUsers,
+        getFavoriteUsers,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

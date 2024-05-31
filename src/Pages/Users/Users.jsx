@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import UserCard from "../../Components/UserCard/UserCard";
+import UserCard from "../../Components/UserCards/UserCard";
 import { UserContext } from "../../Services/userContext";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -39,7 +39,7 @@ const Users = () => {
             {datas && userPage < datas.total_pages && (
               <button
                 onClick={loadMoreUsers}
-                className="btn btn-success w-25 mx-auto"
+                className="btn btn-success"
               >
                 Load More..
               </button>
