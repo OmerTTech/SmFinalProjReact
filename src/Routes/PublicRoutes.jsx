@@ -4,8 +4,8 @@ import { Routes, Route } from 'react-router-dom'
 import Home from '../Pages/Home/Home'
 import Users from '../Pages/Users/Users'
 import Favorites from '../Pages/Favorites/Favorites'
-import Register from '../Pages/Register/Register'
-import Login from '../Pages/Login/Login'
+import Register from '../Pages/Auth/Register/Register'
+import Login from '../Pages/Auth/Login/Login'
 
 const PublicRoutes = () => {
     return (

@@ -3,16 +3,18 @@ import "./Header.css";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../Assets/Logo.png";
 import { GrFavorite } from "react-icons/gr";
+import { MdOutlineLogin } from "react-icons/md";
 import { UserContext } from "../../Services/userContext";
+import Login from "../../Pages/Auth/Login/Login";
 
 const Header = () => {
-  const { setIsLogged, favCount, setFavCount } = useContext(UserContext);
+  const { token, adminToken, setIsLogged, favCount, setFavCount } =
+    useContext(UserContext);
 
   useEffect(() => {
     const myFavs = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavCount(myFavs.length);
   }, [setFavCount]);
-  
 
   return (
     <header className="position-sticky" style={{ top: "0", zIndex: "100" }}>
@@ -61,40 +63,58 @@ const Header = () => {
                   </div>
                 </NavLink>
               </li>
-              <NavLink className="text-decoration-none text-secondary" to="/favorites">
+              <NavLink
+                className="text-decoration-none text-secondary"
+                to="/favorites"
+              >
                 <span className="favorites-counter position-relative">
                   {favCount}
                 </span>
               </NavLink>
-              <li className="nav-item dropdown">
-                <span
-                  className="nav-link dropdown-toggle"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Username
-                </span>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link
-                      onClick={()=> setIsLogged(true)}
-                      className="dropdown-item"
-                      to="/admin/homepage"
-                    >
-                      Admin Panel
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="#">
-                      Logout
-                    </Link>
-                  </li>
-                </ul>
-              </li>
+              {token ? (
+                <li className="nav-item dropdown">
+                  <span
+                    className="nav-link dropdown-toggle"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Username
+                  </span>
+                  <ul className="dropdown-menu">
+                    {adminToken() && (
+                      <>
+                        <li>
+                          <Link
+                            onClick={() => setIsLogged(true)}
+                            className="dropdown-item"
+                            to="/admin/homepage"
+                          >
+                            Admin Panel
+                          </Link>
+                        </li>
+                        <li>
+                          <hr className="dropdown-divider" />
+                        </li>
+                      </>
+                    )}
+                    <li>
+                      <button className="dropdown-item" to="#">
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+              ) : (
+                <Link to={"/login"}>
+                  <button className="loginToken Btn ms-2">
+                    <div className="sign">
+                      <MdOutlineLogin style={{ color: "#fff" }} />
+                    </div>
+                    <div className="text">Login</div>
+                  </button>
+                </Link>
+              )}
             </ul>
           </div>
         </div>

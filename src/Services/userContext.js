@@ -5,6 +5,9 @@ import toast from "react-hot-toast";
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const [token, setToken] = useState("");
+  const [isLogged, setIsLogged] = useState([]);
+
   const [users, setUsers] = useState([]);
   const [nextUsers, setNextUsers] = useState([]);
   const [userPage, setUserPage] = useState(1);
@@ -15,10 +18,14 @@ export const UserProvider = ({ children }) => {
   const [favUsers, setFavUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [isLogged, setIsLogged] = useState([]);
   useEffect(() => {
     setIsLogged(false);
+    setToken(false)
   }, []);
+
+  const adminToken = () => {
+    return (token === "asd123")
+  }
 
   const fetchUsers = async (page = 1) => {
     try {
@@ -128,12 +135,14 @@ export const UserProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
+        token,
+        setToken,
+        adminToken,
         users,
         setUsers,
         datas,
         allUsers,
         getDatas,
-        setUsers,
         nextUsers,
         setNextUsers,
         setAllUsers,
