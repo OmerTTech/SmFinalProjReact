@@ -31,17 +31,6 @@ export const UserProvider = ({ children }) => {
       setLoading(false);
     }
   };
-  const getFavoriteUsers = async () => {
-    try {
-      const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-      setFavUsers(favorites);
-      return favorites;
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const getAllUsers = async () => {
     let users = [];
@@ -50,6 +39,8 @@ export const UserProvider = ({ children }) => {
       const pageUsers = await fetchUsers(i);
       users = [...users, ...pageUsers];
     }
+    localStorage.setItem("allUsers", JSON.stringify(users));
+    
     setAllUsers(users);
     setUsers(users);
   };
@@ -91,15 +82,17 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  useEffect(() => {
-    const loadData = async () => {
-      setLoading(true);
-      await fetchUsers(1);
-      await getDatas();
+  const getFavoriteUsers = async () => {
+    try {
+      const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+      setFavUsers(favorites);
+      return favorites;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    } finally {
       setLoading(false);
-    };
-    loadData();
-  }, []);
+    }
+  };
 
   const favHandler = (user) => {
     const myFavs = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -113,6 +106,25 @@ export const UserProvider = ({ children }) => {
     } else toast.error("You have already added your favorites");
   };
 
+  const delFavHandler = (id) => {
+    const myFavs = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isAlreadyFavorited = myFavs.filter((fav) => fav.id !== id);
+    localStorage.setItem("favorites", JSON.stringify(isAlreadyFavorited));
+        toast.success("Successfully deleted User!");
+        setFavUsers(isAlreadyFavorited);
+        setFavCount(isAlreadyFavorited.length);
+  }
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      await fetchUsers(1);
+      await getDatas();
+      setLoading(false);
+    };
+    loadData();
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
@@ -124,6 +136,7 @@ export const UserProvider = ({ children }) => {
         setUsers,
         nextUsers,
         setNextUsers,
+        setAllUsers,
         fetchUsers,
         loadMoreUsers,
         getAllUsers,
@@ -135,6 +148,7 @@ export const UserProvider = ({ children }) => {
         setIsLogged,
         sortUsers,
         favHandler,
+        delFavHandler,
         favCount,
         setFavCount,
         favUsers,

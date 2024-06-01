@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import "./UserCard.css"
-import { MdFavorite } from "react-icons/md";
 import { UserContext } from "../../Services/userContext";
 
 const UserCard = ({ user }) => {
-  const { favHandler } =
+  const { delFavHandler } =
     useContext(UserContext);
   return (
     <div className="col-sm-6 col-lg-4 col-6 pt-3 d-flex flex-column usercard">
@@ -12,7 +11,7 @@ const UserCard = ({ user }) => {
       <p className="text-center">{user.email}</p>
       <img src={user.avatar} alt="avatar" />
       
-      <button onClick={()=>favHandler(user)} className="mx-auto btn-danger mt-3 p-2 text-white">
+      <button onClick={()=>delFavHandler(user.id)} className="mx-auto btn-danger mt-3 p-2 text-white">
         Delete
       </button>
     </div>

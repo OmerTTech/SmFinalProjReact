@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Header.css";
 import { Link, NavLink } from "react-router-dom";
 import Logo from "../../Assets/Logo.png";
@@ -11,7 +11,9 @@ const Header = () => {
   useEffect(() => {
     const myFavs = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavCount(myFavs.length);
-  }, []);
+  }, [setFavCount]);
+  
+
   return (
     <header className="position-sticky" style={{ top: "0", zIndex: "100" }}>
       <nav className="navbar navbar-expand-lg bg-body-tertiary mt-2 py-1">
@@ -76,9 +78,9 @@ const Header = () => {
                 <ul className="dropdown-menu">
                   <li>
                     <Link
-                      onClick={() => setIsLogged(true)}
+                      onClick={()=> setIsLogged(true)}
                       className="dropdown-item"
-                      to="#"
+                      to="/admin/homepage"
                     >
                       Admin Panel
                     </Link>

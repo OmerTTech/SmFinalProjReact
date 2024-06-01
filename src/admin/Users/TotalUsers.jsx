@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import UpdateModal from "../../Components/Update/Update.jsx";
 import "./TotalUsers.css"
 import { UserContext } from "../../Services/userContext.js";
 
@@ -13,9 +14,9 @@ const TotalUsers = () => {
   }, []);
 
   return (
-    <div className="container mt-4 mb-5">
+    <div className="container mt-4 mb-5 px-5">
       <h1>Total Users({datas ? datas.total : <ClipLoader color="#00ff00"/>})</h1>
-      <table className="table table-striped table-hover mt-5 mx-auto w-75">
+      <table className="table table-striped table-hover mt-5 mx-auto w-100">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -38,7 +39,7 @@ const TotalUsers = () => {
                   <img src={user.avatar} alt={user.first_name} />
                 </td>
                 <td>
-                  <button className="btn btn-success me-1">Update</button>
+                  <UpdateModal className="btn btn-success me-1" user={user} modalId={`updateModal${user.id}`}/>
                   <button className="btn btn-danger">Delete</button>
                 </td>
               </tr>

@@ -45,18 +45,20 @@ const Favorites = () => {
         </select>
       </span>
       <div className="row mx-5 p- pt-4 g-5">
-        {favUsers && favUsers.length > 0 ? (
+        {favUsers ? favUsers.length > 0 ? (
           <>
             {favUsers.map((item) => (
               <FavUserCard key={item.id} user={item} />
             ))}
           </>
         ) : (
-          <div className="alert alert-danger" role="alert">
-            <ClipLoader color="#36d7b7" />
-            Favorite Users Not Found..
+          <div className="alert alert-danger text-center" role="alert">
+            <p className="m-0">Favorites is Empty...</p>
           </div>
-        )}
+        ) : <div className="alert alert-danger text-center" role="alert">
+                        <ClipLoader color="#36d7b7" />
+        <p className="m-0">Favorites Users is not found...</p>
+      </div>}
       </div>
     </div>
   );
