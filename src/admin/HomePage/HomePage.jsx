@@ -2,12 +2,22 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../../Services/userContext";
 import { FaUser, FaBookOpen, FaUsers } from "react-icons/fa";
 import { MdOutlineInsertPageBreak } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const { getDatas, datas } = useContext(UserContext);
+  const { isLogged } = useContext(UserContext);
+  const navigator = useNavigate()
+
   useEffect(() => {
     getDatas();
   }, []);
+
+  useEffect(() => {
+    if (isLogged) {
+      navigator("/admin/homepage");
+    }
+  }, [isLogged]);
 
   return (
     <div

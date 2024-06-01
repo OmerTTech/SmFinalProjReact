@@ -15,8 +15,8 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true); 
   
   
-  const [isLogged, setIsLogged] = useState([]);
-  useEffect(()=>{setIsLogged(true)},[])
+  const [isLogged, setIsLogged] = useState(false);
+  useEffect(()=>{setIsLogged(false)},[])
 
   const fetchUsers = async (page = 1) => {
     try {
@@ -60,6 +60,7 @@ export const UserProvider = ({ children }) => {
         const sortedUsers = sortUsers([...users, ...newUsers], sortFilter);
         setNextUsers([...nextUsers, ...newUsers]);
         setUsers(sortedUsers);
+        console.log(sortedUsers);
       } catch (error) {
         console.error("Error loading more users:", error);
       }
