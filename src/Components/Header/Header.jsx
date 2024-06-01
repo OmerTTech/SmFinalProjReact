@@ -14,7 +14,7 @@ const Header = () => {
   }, []);
   return (
     <header className="position-sticky" style={{ top: "0", zIndex: "100" }}>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary mt-2 py-1">
         <div className="container">
           <Link className="navbar-brand" to="/">
             <img
