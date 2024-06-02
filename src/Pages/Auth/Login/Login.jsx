@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../Auth.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { loginUser } from "../../../Services/api";
-import axios from "axios";
+import { UserContext } from "../../../Services/userContext";
 
 const Login = () => {
-  const [userLogin, setUserLogin] = useState({
-    email: "",
-    password: "",
-  });
+    const { setToken } =
+    useContext(UserContext);
+    const [userLogin, setUserLogin] = useState({
+        email: "",
+        password: "",
+    });
+    const navigator = useNavigate();
 
   const getLogin = async () => {
     if (userLogin.email.length > 0 && userLogin.password.length > 0) {
@@ -19,7 +22,10 @@ const Login = () => {
 
         if (data) {
           console.log(data);
+          localStorage.setItem("token", JSON.stringify(data));
+          setToken(data);
           toast.success("Successfully logged in!");
+          navigator("/");
         }
       } catch (error) {
         toast.error(`Error! ${error.response.data.error}`);

@@ -6,6 +6,7 @@ import { GrFavorite } from "react-icons/gr";
 import { MdOutlineLogin } from "react-icons/md";
 import { UserContext } from "../../Services/userContext";
 import Login from "../../Pages/Auth/Login/Login";
+import { getLoginUser } from "../../Services/api";
 
 const Header = () => {
   const { token, adminToken, setIsLogged, favCount, setFavCount } =
@@ -78,8 +79,8 @@ const Header = () => {
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
-                  >
-                    Username
+                  > 
+                    {token && getLoginUser(1) ? "Username" : "asd"}
                   </span>
                   <ul className="dropdown-menu">
                     {adminToken() && (
