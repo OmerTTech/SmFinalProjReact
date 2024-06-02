@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
-import { allData, getUsers } from "./api";
+import { allData, getUsers, singleUser } from "./api";
 import toast from "react-hot-toast";
 
 export const UserContext = createContext();
@@ -8,6 +8,7 @@ export const UserProvider = ({ children }) => {
   const [token, setToken] = useState("");
   const [isLogged, setIsLogged] = useState([]);
 
+  const [singleUserData, setSingleUserData] = useState([]);
   const [users, setUsers] = useState([]);
   const [nextUsers, setNextUsers] = useState([]);
   const [userPage, setUserPage] = useState(1);
@@ -24,7 +25,13 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const adminToken = () => {
-    return (token === "asd123")
+    return (token === "admin123")
+  }
+
+  const getUserData = async () => {
+      const userId = JSON.parse(localStorage.getItem("userId")) || [];
+      const {data} = await singleUser(userId);
+      setSingleUserData(data.data)
   }
 
   const fetchUsers = async (page = 1) => {
@@ -163,6 +170,9 @@ export const UserProvider = ({ children }) => {
         favUsers,
         setFavUsers,
         getFavoriteUsers,
+        getUserData,
+        singleUserData,
+        setSingleUserData,
       }}
     >
       {children}

@@ -5,18 +5,41 @@ import Logo from "../../Assets/Logo.png";
 import { GrFavorite } from "react-icons/gr";
 import { MdOutlineLogin } from "react-icons/md";
 import { UserContext } from "../../Services/userContext";
-import Login from "../../Pages/Auth/Login/Login";
-import { getLoginUser } from "../../Services/api";
 
 const Header = () => {
-  const { token, adminToken, setIsLogged, favCount, setFavCount } =
-    useContext(UserContext);
+  const {
+    token,
+    setToken,
+    getUserData,
+    adminToken,
+    setIsLogged,
+    favCount,
+    setFavCount,
+    singleUserData,
+    setSingleUserData,
+  } = useContext(UserContext);
 
   useEffect(() => {
     const myFavs = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavCount(myFavs.length);
   }, [setFavCount]);
 
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("token"));
+    getUserData();
+    setToken(data);
+  }, []);
+
+  const logOutHandler = () => {
+    localStorage.removeItem("userId");
+    setSingleUserData(null);
+    localStorage.removeItem("token");
+    setToken(null);
+  };
+
+  const adminUser = JSON.parse(localStorage.getItem("adminUser"))
+
+  console.log(singleUserData);
   return (
     <header className="position-sticky" style={{ top: "0", zIndex: "100" }}>
       <nav className="navbar navbar-expand-lg bg-body-tertiary mt-2 py-1">
@@ -79,8 +102,10 @@ const Header = () => {
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
-                  > 
-                    {token && getLoginUser(1) ? "Username" : "asd"}
+                  >
+                    {adminToken() ? adminUser.first_name : token && singleUserData
+                      ? singleUserData.first_name
+                      : "Error"}
                   </span>
                   <ul className="dropdown-menu">
                     {adminToken() && (
@@ -100,7 +125,11 @@ const Header = () => {
                       </>
                     )}
                     <li>
-                      <button className="dropdown-item" to="#">
+                      <button
+                        onClick={logOutHandler}
+                        className="dropdown-item"
+                        to="#"
+                      >
                         Logout
                       </button>
                     </li>
