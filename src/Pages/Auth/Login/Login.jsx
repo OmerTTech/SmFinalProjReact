@@ -55,7 +55,7 @@ const Login = () => {
     <div>
       <div className="container d-flex justify-content-center align-items-center mt-4 mb-5">
         <div className="form border border-secondary rounded d-flex justify-content-center align-items-center flex-column py-3 gap-2">
-          <h4>SignIn to your account</h4>
+          <h4 className="text-center">Sign In</h4>
           <input
             onChange={(e) =>
               setUserLogin({ ...userLogin, email: e.target.value })
